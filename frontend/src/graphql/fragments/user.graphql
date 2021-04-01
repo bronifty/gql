@@ -1,0 +1,8 @@
+fragment UserData on User {
+  id
+  email
+  upvotes
+  downvotes
+  posts
+  createdAt
+}

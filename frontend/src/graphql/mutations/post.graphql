@@ -1,0 +1,17 @@
+mutation CreatePost($data: PostInput!) {
+  createPost(data: $data) {
+    ...PostData
+  }
+}
+
+mutation DeletePost($id: Float!) {
+  deletePost(id: $id) {
+    ...PostData
+  }
+}
+
+mutation UpdatePost($data: PostInput!, $id: Float!) {
+  updatePost(data: $data, id: $id) {
+    ...PostData
+  }
+}

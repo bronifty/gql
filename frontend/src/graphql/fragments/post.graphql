@@ -1,0 +1,11 @@
+fragment PostData on Post {
+  id
+  title
+  description
+  upvotes
+  downvotes
+  creator {
+    email
+  }
+  createdAt
+}

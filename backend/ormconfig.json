@@ -1,0 +1,11 @@
+{
+  "type": "postgres",
+  "host": "postgres",
+  "username": "postgres_user",
+  "password": "postgres_password",
+  "entities": ["src/entities/*.ts"],
+  "migrations": ["src/migrations/*.ts"],
+  "cli": {
+    "migrationsDir": "src/migrations"
+  }
+}

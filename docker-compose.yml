@@ -1,0 +1,56 @@
+version: "3"
+services:
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=postgres_password
+      - POSTGRES_USER=postgres_user
+    ports:
+      - 3001:5432
+
+  redis:
+    image: redis
+
+  backend:
+    restart: always
+    build:
+      context: backend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./backend:/app
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_USER=postgres_user
+      - POSTGRES_PASSWORD=postgres_password
+      - REDIS_HOST=redis
+
+      # the container port for dev
+      # PORT comes from heroku in prod
+      - PORT=3000
+
+      # 1. add .env
+      # 2. add your own email id and password for password reset functionality to work in dev mode
+      - GMAIL_MAILID=${GMAIL_MAILID}
+      - GMAIL_PASSWORD=${GMAIL_PASSWORD}
+
+      - NODE_ENV=dev
+
+      - REDIS_SESSION_SECRET=redis_session_secret
+      - PASSWORD_RESET_SECRET=password_reset_secret
+      - BASE_URL=http://localhost:3000
+
+  frontend:
+    restart: always
+    build:
+      context: frontend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./frontend:/app
+
+  proxy:
+    restart: always
+    build:
+      context: proxy
+      dockerfile: Dockerfile.dev
+    ports:
+      - 3000:80

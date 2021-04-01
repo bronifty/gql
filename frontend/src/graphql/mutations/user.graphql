@@ -1,0 +1,21 @@
+mutation Signup($data: UserInput!) {
+  signup(data: $data)
+}
+
+mutation Login($data: UserInput!) {
+  login(data: $data) {
+    ...UserData
+  }
+}
+
+mutation Logout {
+  logout
+}
+
+mutation ChangePassword($token: String!, $password: String!) {
+  changePassword(token: $token, password: $password)
+}
+
+mutation GetResetPasswordLink($email: String!) {
+  getResetPasswordLink(email: $email)
+}
