@@ -30,6 +30,7 @@ const main = async () => {
   );
   apolloServer.applyMiddleware({ app, cors: false });
   app.listen(process.env.PORT);
+  app.set("trust proxy", true);
 };
 
 main()

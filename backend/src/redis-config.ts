@@ -22,7 +22,7 @@ export const redisSession = session({
     maxAge: 1000 * 60 * 60 * 24 * 5,
     httpOnly: true,
     sameSite: "lax",
-    secure: process.env.NODE_ENV !== "dev",
+    secure: false,
   },
   secret: process.env.REDIS_SESSION_SECRET as string,
   resave: false,
